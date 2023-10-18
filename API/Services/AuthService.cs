@@ -11,9 +11,9 @@ using Microsoft.AspNetCore.Mvc;
 using Persistence;
 using Microsoft.VisualBasic;
 using System.Security.Cryptography;
+using Api.Helpers;
 
-namespace API.Services
-{
+namespace API.Services;
     public class AuthService : IAuthService
     {
         private readonly APIContext _context;
@@ -55,7 +55,7 @@ namespace API.Services
         public async Task<AuthResponse> ReturnToken(AuthRequest auth)
         {
             var userFound = _context.Users.FirstOrDefault(x =>
-                x.UserCc == auth.Username &&
+                x.UserCc == auth.Cedula &&
                 x.Password == auth.Password
             );
 
@@ -67,5 +67,24 @@ namespace API.Services
 
             return new AuthResponse(){Token = tokenCreated, Result = true, Msg = "OK"};
         }
-    }
+
+        public bool ValidarToken(string Token)
+        {   
+            string securityKey = "%LP!Y4bOeM@I(kqaRYF{-5nunH]ZAi6xF!JC:%T49{b?ghK''bgNi|%T`,w933Qa";
+            ClaimsPrincipal claimsPrincipal = JwtHelper.ValidateAndDecodeJwt(Token, securityKey);
+            if (claimsPrincipal != null)
+            {
+                // El token es válido, y puedes acceder a las claims (reclamaciones) dentro de él.
+                foreach (var claim in claimsPrincipal.Claims)
+                {
+                    Console.WriteLine($"{claim.Type}: {claim.Value}");
+
+                }
+                return true;
+            }
+            return false;
+           
+        }
+
+   
 }

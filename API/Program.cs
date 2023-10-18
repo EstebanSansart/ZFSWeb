@@ -47,8 +47,8 @@ builder.Services.AddAuthentication(config =>{
     config.TokenValidationParameters = new TokenValidationParameters {
         ValidateIssuerSigningKey = true,
         IssuerSigningKey = new SymmetricSecurityKey(keyBytes),
-        ValidateIssuer = false,
-        ValidateAudience = false,
+        ValidateIssuer = true,
+        ValidateAudience = true,
         ValidateLifetime = true,
         ClockSkew = TimeSpan.Zero
     };

@@ -90,12 +90,31 @@ public class UserController : BaseApiController
     [HttpPost("Autenticar")]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<IActionResult> Autenticar([FromBody] AuthRequest auth){
+    public async Task<IActionResult> Autenticar([FromBody] AuthRequest auth)
+    {
         var AuthResult = await _authService.ReturnToken(auth);
         if(AuthResult == null)
-            return Unauthorized();
+            return NotFound();
+            Console.WriteLine(AuthResult);
         return Ok(AuthResult);
-}
+     }
+
+     [HttpPost("TokenValidate")]
+     //[Authorize(Roles="")]
+     [ProducesResponseType(StatusCodes.Status200OK)]
+     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+
+     public async Task<ActionResult<bool>> ValidarToken(string Token)
+     {
+        if(Token != null)
+        {
+
+        return  Ok(_authService.ValidarToken(Token));
+        }
+
+        return Ok(false) ;
+     }
 
     [HttpPut]
    // [Authorize(Roles="")]
@@ -124,4 +143,5 @@ public class UserController : BaseApiController
         await _unitOfWork.SaveAsync();
         return NoContent();
     }
+
 }
