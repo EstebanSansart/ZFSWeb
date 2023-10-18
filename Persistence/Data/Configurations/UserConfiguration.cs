@@ -34,6 +34,10 @@ namespace Persistence.Data.Configurations
             .HasDefaultValue(true)
             .HasColumnName("is_new");
 
+            builder.Property(r => r.Password)
+            .IsRequired()
+            .HasColumnName("user_password");
+
             // Relationships
             builder.HasOne(x => x.Company)
             .WithMany(x => x.Users)
@@ -54,7 +58,8 @@ namespace Persistence.Data.Configurations
                 Name = "Rolando",
                 Age = "10",
                 Contact = "rolandogarcia@gmail.com",
-                IsNew = true
+                IsNew = true,
+                Password = "123456"
             }
         );
         }

@@ -1,4 +1,4 @@
-namespace ApiJWTManual.Dtos.Custom
+namespace API.Dtos.Custom
 {
     public class AuthResponse
     {

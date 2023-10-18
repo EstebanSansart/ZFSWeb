@@ -1,6 +1,6 @@
-using ApiJWTManual.Dtos.Custom;
+using API.Dtos.Custom;
 
-namespace ApiJWTManual.Services
+namespace API.Services
 {
     public interface IAuthService
     {
