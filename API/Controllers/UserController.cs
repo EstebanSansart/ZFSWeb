@@ -1,5 +1,7 @@
 using API.Dtos;
+using API.Dtos.Custom;
 using API.Helpers;
+using API.Services;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
@@ -16,11 +18,13 @@ public class UserController : BaseApiController
 {
     private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
+    private readonly IAuthService _authService;
 
-    public UserController(IUnitOfWork unitOfWork, IMapper mapper)
+    public UserController(IUnitOfWork unitOfWork, IMapper mapper, IAuthService authService)
     {
         this._unitOfWork = unitOfWork;
         _mapper = mapper;
+        _authService = authService;
     }
     [HttpGet]
     //[Authorize(Roles = "Administrador")]
@@ -69,6 +73,16 @@ public class UserController : BaseApiController
         userDto.UserCc = user.UserCc;
         return CreatedAtAction(nameof(Post),new {id= userDto.UserCc}, userDto);
     }
+
+    [HttpPost]
+    [Route("Autenticar")]
+    public async Task<IActionResult> Autenticar([FromBody] AuthRequest auth){
+        var AuthResult = await _authService.ReturnToken(auth);
+        if(AuthResult == null)
+            return Unauthorized();
+        return Ok(AuthResult);
+}
+
     [HttpPut]
    // [Authorize(Roles="")]
     [ProducesResponseType(StatusCodes.Status200OK)]
