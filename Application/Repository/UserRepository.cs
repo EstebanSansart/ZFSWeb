@@ -41,22 +41,17 @@ public class UserRepository : GenericRepository<User>, IUser
     {
         // Definir los caracteres permitidos en la contraseña
         const string allowedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        
         // Longitud de la contraseña
         const int passwordLength = 6;
-
         // Crear un array de caracteres aleatorios
         char[] chars = new char[passwordLength];
-
         // Crear una instancia de Random para generar números aleatorios
         Random random = new Random();
-
         // Llenar el array con caracteres aleatorios
         for (int i = 0; i < passwordLength; i++)
         {
             chars[i] = allowedChars[random.Next(0, allowedChars.Length)];
         }
-
         // Devolver la contraseña generada
         return new string(chars);
     }
