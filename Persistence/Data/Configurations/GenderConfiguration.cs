@@ -20,6 +20,13 @@ namespace Persistence.Data.Configurations
             builder.Property(r => r.GenderType)
             .IsRequired()
             .HasColumnName("gender_type");
+
+            builder.HasData(
+                new{
+                    GenderId = 1,
+                    GenderType = "Hombre"
+                }
+            );
         }
     }
 }

@@ -146,6 +146,9 @@ namespace Persistence.Data.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     user_contact = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
+                    is_new = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: true),
+                    user_password = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     CompanyId = table.Column<int>(type: "int", nullable: false),
                     GenderId = table.Column<int>(type: "int", nullable: false),
                     LevelId = table.Column<int>(type: "int", nullable: false)
@@ -201,6 +204,33 @@ namespace Persistence.Data.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
+                name: "refresh_token_record",
+                columns: table => new
+                {
+                    RefreshTokenRecordId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    token = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    refresh_token = table.Column<string>(type: "varchar(200)", maxLength: 200, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    creation_date = table.Column<DateTime>(type: "DateTime", nullable: false),
+                    expiration_date = table.Column<DateTime>(type: "DateTime", nullable: false),
+                    IsActive = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    UserCc = table.Column<string>(type: "varchar(255)", nullable: true)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_refresh_token_record", x => x.RefreshTokenRecordId);
+                    table.ForeignKey(
+                        name: "FK__Record__UserId__24927208",
+                        column: x => x.UserCc,
+                        principalTable: "user",
+                        principalColumn: "user_cc");
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
                 name: "user_reaction",
                 columns: table => new
                 {
@@ -252,9 +282,34 @@ namespace Persistence.Data.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
+            migrationBuilder.InsertData(
+                table: "company",
+                columns: new[] { "company_id", "company_contact", "company_name" },
+                values: new object[] { 1, "solvoq@ec.com", "Solvo" });
+
+            migrationBuilder.InsertData(
+                table: "gender",
+                columns: new[] { "gender_id", "gender_type" },
+                values: new object[] { 1, "Hombre" });
+
+            migrationBuilder.InsertData(
+                table: "level",
+                columns: new[] { "level_id", "level_current_points", "level_number" },
+                values: new object[] { 1, "0", 1 });
+
+            migrationBuilder.InsertData(
+                table: "user",
+                columns: new[] { "user_cc", "user_age", "CompanyId", "user_contact", "GenderId", "is_new", "LevelId", "user_name", "user_password" },
+                values: new object[] { "1065853628", "10", 1, "rolandogarcia@gmail.com", 1, true, 1, "Rolando", "123456" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_event_attendance_UserCc",
                 table: "event_attendance",
+                column: "UserCc");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_refresh_token_record_UserCc",
+                table: "refresh_token_record",
                 column: "UserCc");
 
             migrationBuilder.CreateIndex(
@@ -291,6 +346,9 @@ namespace Persistence.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "image");
+
+            migrationBuilder.DropTable(
+                name: "refresh_token_record");
 
             migrationBuilder.DropTable(
                 name: "user_reaction");

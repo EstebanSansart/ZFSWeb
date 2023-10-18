@@ -24,7 +24,7 @@ public class ImageController : BaseApiController
     }
     [HttpGet]
     //[Authorize(Roles = "Administrador")]
-    [MapToApiVersion("1.0")]
+    //[MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async  Task<ActionResult<IEnumerable<ImageDto>>> Get()

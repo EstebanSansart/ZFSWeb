@@ -24,6 +24,14 @@ namespace Persistence.Data.Configurations
             builder.Property(r => r.CurrentPoints)
             .IsRequired()
             .HasColumnName("level_current_points");
+
+            builder.HasData(
+                new{
+                    LevelId = 1,
+                    LevelNumber = 1,
+                    CurrentPoints = "0"
+                }
+            );
         }
     }
 }

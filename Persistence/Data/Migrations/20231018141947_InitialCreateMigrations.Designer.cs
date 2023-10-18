@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
@@ -11,7 +12,7 @@ using Persistence;
 namespace Persistence.Data.Migrations
 {
     [DbContext(typeof(APIContext))]
-    [Migration("20231018130242_InitialCreateMigrations")]
+    [Migration("20231018141947_InitialCreateMigrations")]
     partial class InitialCreateMigrations
     {
         /// <inheritdoc />
@@ -42,6 +43,14 @@ namespace Persistence.Data.Migrations
                     b.HasKey("CompanyId");
 
                     b.ToTable("company", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            CompanyId = 1,
+                            Contact = "solvoq@ec.com",
+                            Name = "Solvo"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Event", b =>
@@ -115,6 +124,13 @@ namespace Persistence.Data.Migrations
                     b.HasKey("GenderId");
 
                     b.ToTable("gender", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            GenderId = 1,
+                            GenderType = "Hombre"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Image", b =>
@@ -153,6 +169,14 @@ namespace Persistence.Data.Migrations
                     b.HasKey("LevelId");
 
                     b.ToTable("level", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            LevelId = 1,
+                            CurrentPoints = "0",
+                            LevelNumber = 1
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Reaction", b =>
@@ -170,6 +194,48 @@ namespace Persistence.Data.Migrations
                     b.HasKey("ReactionId");
 
                     b.ToTable("reaction", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.RefreshTokenRecord", b =>
+                {
+                    b.Property<int>("RefreshTokenRecordId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("RefreshTokenRecordId")
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("DateTime")
+                        .HasColumnName("creation_date");
+
+                    b.Property<DateTime>("ExpirationDate")
+                        .HasColumnType("DateTime")
+                        .HasColumnName("expiration_date");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("tinyint(1)")
+                        .HasColumnName("IsActive");
+
+                    b.Property<string>("RefreshToken")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("varchar(200)")
+                        .HasColumnName("refresh_token");
+
+                    b.Property<string>("Token")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("varchar(500)")
+                        .HasColumnName("token");
+
+                    b.Property<string>("UserCc")
+                        .HasColumnType("varchar(255)");
+
+                    b.HasKey("RefreshTokenRecordId");
+
+                    b.HasIndex("UserCc");
+
+                    b.ToTable("refresh_token_record", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Tag", b =>
@@ -216,6 +282,12 @@ namespace Persistence.Data.Migrations
                     b.Property<int>("GenderId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsNew")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(true)
+                        .HasColumnName("is_new");
+
                     b.Property<int>("LevelId")
                         .HasColumnType("int");
 
@@ -223,6 +295,11 @@ namespace Persistence.Data.Migrations
                         .IsRequired()
                         .HasColumnType("longtext")
                         .HasColumnName("user_name");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("user_password");
 
                     b.HasKey("UserCc");
 
@@ -233,6 +310,20 @@ namespace Persistence.Data.Migrations
                     b.HasIndex("LevelId");
 
                     b.ToTable("user", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserCc = "1065853628",
+                            Age = "10",
+                            CompanyId = 1,
+                            Contact = "rolandogarcia@gmail.com",
+                            GenderId = 1,
+                            IsNew = true,
+                            LevelId = 1,
+                            Name = "Rolando",
+                            Password = "123456"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.UserReaction", b =>
@@ -280,6 +371,16 @@ namespace Persistence.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Event");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Domain.Entities.RefreshTokenRecord", b =>
+                {
+                    b.HasOne("Domain.Entities.User", "User")
+                        .WithMany("RefreshTokenRecords")
+                        .HasForeignKey("UserCc")
+                        .HasConstraintName("FK__Record__UserId__24927208");
 
                     b.Navigation("User");
                 });
@@ -382,6 +483,8 @@ namespace Persistence.Data.Migrations
             modelBuilder.Entity("Domain.Entities.User", b =>
                 {
                     b.Navigation("EventAttendances");
+
+                    b.Navigation("RefreshTokenRecords");
 
                     b.Navigation("UserReactions");
 

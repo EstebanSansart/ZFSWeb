@@ -54,12 +54,15 @@ namespace Persistence.Data.Configurations
             // Default Data
             builder.HasData(
             new{
-                UserCc = 1065853628,
+                UserCc = "1065853628",
                 Name = "Rolando",
                 Age = "10",
                 Contact = "rolandogarcia@gmail.com",
                 IsNew = true,
-                Password = "123456"
+                Password = "123456",
+                CompanyId = 1,
+                GenderId = 1,
+                LevelId = 1
             }
         );
         }

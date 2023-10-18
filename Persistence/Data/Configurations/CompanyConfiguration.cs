@@ -24,6 +24,14 @@ namespace Persistence.Data.Configurations
             builder.Property(r => r.Contact)
             .IsRequired()
             .HasColumnName("company_contact");
+
+            builder.HasData(
+                new{
+                    CompanyId = 1,
+                    Name = "Solvo",
+                    Contact = "solvoq@ec.com"
+                }
+            );
         }
     }
 }
