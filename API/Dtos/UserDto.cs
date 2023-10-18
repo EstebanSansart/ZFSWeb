@@ -5,6 +5,7 @@ public class UserDto
     public string UserCc { get; set; }
     public string Name { get; set; }
     public string Age { get; set; }
+    public bool IsNew { get; set; }
     public string Contact { get; set; }
     // Foreign Keys
     public int CompanyId { get; set; }

@@ -29,6 +29,11 @@ namespace Persistence.Data.Configurations
             .IsRequired()
             .HasColumnName("user_contact");
 
+            builder.Property(r => r.IsNew)
+            .IsRequired()
+            .HasDefaultValue(true)
+            .HasColumnName("is_new");
+
             // Relationships
             builder.HasOne(x => x.Company)
             .WithMany(x => x.Users)
@@ -41,6 +46,17 @@ namespace Persistence.Data.Configurations
             builder.HasOne(x => x.Level)
             .WithMany(x => x.Users)
             .HasForeignKey(x => x.LevelId);
+
+            // Default Data
+            builder.HasData(
+            new{
+                UserCc = 1065853628,
+                Name = "Rolando",
+                Age = "10",
+                Contact = "rolandogarcia@gmail.com",
+                IsNew = true
+            }
+        );
         }
     }
 }
