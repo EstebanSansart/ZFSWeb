@@ -35,7 +35,6 @@ namespace Persistence.Data.Configurations
             .HasColumnName("is_new");
 
             builder.Property(r => r.Password)
-            .IsRequired()
             .HasColumnName("user_password");
 
             // Relationships
