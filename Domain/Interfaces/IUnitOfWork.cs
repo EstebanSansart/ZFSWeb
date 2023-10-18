@@ -3,9 +3,9 @@ namespace Domain.Interfaces;
 
 public interface IUnitOfWork
 {
-    public ICompany Companys {get;}
+    public ICompany Companies {get;}
     public IEvent Events {get;}
-    public IEventAttendance EventAtteIEventAttendances {get;}
+    public IEventAttendance EventAttendances {get;}
     public IGender Genders {get;}
     public ILevel Levels {get;}
     public IReaction Reactions {get;}

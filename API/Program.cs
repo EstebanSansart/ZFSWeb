@@ -1,21 +1,42 @@
+using System.Reflection;
+using API.Extensions;
+using AspNetCoreRateLimit;
 using Microsoft.EntityFrameworkCore;
 using Persistence;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
+
+var logger = new LoggerConfiguration()
+					.ReadFrom.Configuration(builder.Configuration)
+					.Enrich.FromLogContext()
+					.CreateLogger();
+
+//builder.Logging.ClearProviders();
+builder.Logging.AddSerilog(logger);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
-
-// Add SQL Connection
-builder.Services.AddDbContext<APIContext>(opts =>{
-    string connection = builder.Configuration["ConnectionStrings:MainConnection"]?? throw new Exception("Error: Invalid Connection");
-    opts.UseMySql(connection, ServerVersion.AutoDetect(connection));
-});
-
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddDbContext<APIContext>(opt =>
+{
+    string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    opt.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+});
 builder.Services.AddSwaggerGen();
+builder.Services.AddAutoMapper(Assembly.GetEntryAssembly());
+builder.Services.ConfigureCors();
+builder.Services.AddApplicationServices();
+builder.Services.ConfigureRateLimiting();
+builder.Services.ConfigureApiVersioning();
+/* builder.Services.AddHttpsRedirection(options =>
+    {
+        options.HttpsPort = 443;
+    }); */
+
+
 
 var app = builder.Build();
 
@@ -26,7 +47,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors("CorsPolicy");
+
 app.UseHttpsRedirection();
+
+app.UseIpRateLimiting();
+ 
+app.UseAuthentication();
 
 app.UseAuthorization();
 
