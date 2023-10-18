@@ -74,8 +74,22 @@ public class UserController : BaseApiController
         return CreatedAtAction(nameof(Post),new {id= userDto.UserCc}, userDto);
     }
 
-    [HttpPost]
-    [Route("Autenticar")]
+    [HttpPost("Login")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<LoginDto>> PostLogin(LoginDto loginDto){
+        bool autenticacion = await _unitOfWork.Users.ValidarUsuario(loginDto.UserCc,loginDto.Password);
+        if (autenticacion)
+        {
+           
+            return Ok("Usuario logueado");
+        }
+        return NotFound();
+    }
+
+    [HttpPost("Autenticar")]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> Autenticar([FromBody] AuthRequest auth){
         var AuthResult = await _authService.ReturnToken(auth);
         if(AuthResult == null)
