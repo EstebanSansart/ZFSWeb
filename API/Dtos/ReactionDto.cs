@@ -7,5 +7,4 @@ public class ReactionDto
 
     // Collections
     public ICollection<UserDto> Users { get; set; } = new HashSet<UserDto>();
-    public ICollection<UserReactionDto> UserReactions { get; set; }
 }

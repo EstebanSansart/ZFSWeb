@@ -1,4 +1,4 @@
-namespace IncApi.Helpers
+namespace API.Helpers
 {
     public class Pager<T> where T : class
     {

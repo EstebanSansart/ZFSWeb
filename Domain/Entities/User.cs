@@ -1,7 +1,7 @@
 namespace Domain.Entities;
 public class User{
     // Properties
-    public string UserCc { get; set; }
+    public int UserCc { get; set; }
     public string Name { get; set; }
     public string Age { get; set; }
     public string Contact { get; set; }

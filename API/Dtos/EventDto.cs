@@ -12,5 +12,4 @@ public class EventDto
 
     // Collections
     public ICollection<UserDto> Users { get; set; } = new HashSet<UserDto>();
-    public ICollection<EventAttendanceDto> EventAttendances { get; set; }
 }

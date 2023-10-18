@@ -8,5 +8,4 @@ public class TagDto
 
     // Collections
     public ICollection<UserDto> Users { get; set; } = new HashSet<UserDto>();
-    public ICollection<UserTagDto> UserTags { get; set; }
 }

@@ -15,6 +15,7 @@ namespace Persistence.Data.Configurations
             // Properties
             builder.Property(r => r.UserCc)
             .IsRequired()
+            .HasColumnType("int")
             .HasColumnName("UserCc");
 
             builder.Property(r => r.Name)
