@@ -20,6 +20,16 @@ namespace Persistence.Data.Configurations
             builder.Property(r => r.Url)
             .IsRequired()
             .HasColumnName("image_url");
+
+            builder.HasData
+            (
+                new
+                {
+                 ImageId =1,
+                 Url ="https://www.tooltyp.com/wp-content/uploads/2014/10/1900x920-8-beneficios-de-usar-imagenes-en-nuestros-sitios-web.jpg "
+                }
+
+            );
         }
     }
 }

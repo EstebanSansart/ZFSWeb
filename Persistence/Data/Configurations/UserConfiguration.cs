@@ -56,7 +56,9 @@ namespace Persistence.Data.Configurations
                 UserCc = "1065853628",
                 Name = "Rolando",
                 Age = "10",
+                
                 Contact = "rolandogarcia@gmail.com",
+                Points = 50,
                 IsNew = true,
                 Password = "123456",
                 CompanyId = 1,

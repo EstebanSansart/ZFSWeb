@@ -49,6 +49,11 @@ public class GenericRepository<T> : IGenericRepository<T> where T : class
         return await _context.Set<T>().FindAsync(Id);
     }
 
+    public virtual  async Task<T> GetByIdString(string id)
+    {
+        return await _context.Set<T>().FindAsync(id);
+    }
+
     public virtual void Remove(T Entity)
     {
         _context.Set<T>().Remove(Entity);

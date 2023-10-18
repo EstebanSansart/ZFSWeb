@@ -7,6 +7,7 @@ public class User{
     public string Contact { get; set; }
     public bool IsNew { get; set; }
     public string Password { get; set; }
+    public int Points { get; set; }
 
     // Collections
     public ICollection<Reaction> Reactions { get; set; } = new HashSet<Reaction>();
