@@ -26,7 +26,7 @@ builder.Services.AddControllers();
 // Add SQL connection
 builder.Services.AddDbContext<APIContext>(opt =>
 {
-    string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    string connectionString = builder.Configuration.GetConnectionString("DefaultConnectionLuis");
     opt.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 

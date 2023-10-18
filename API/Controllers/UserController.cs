@@ -51,9 +51,9 @@ public class UserController : BaseApiController
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<ActionResult<UserDto>> Get(int id)
+    public async Task<ActionResult<UserDto>> Get(string id)
     {
-        var user = await _unitOfWork.Users.GetById(id);
+        var user = await _unitOfWork.Users.GetByIdString(id);
         if (user == null){
             return NotFound();
         }
@@ -148,5 +148,27 @@ public class UserController : BaseApiController
         await _unitOfWork.SaveAsync();
         return NoContent();
     }
+
+
+    [HttpPut("UpdatePassword")]
+    [Authorize(Roles="")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<ActionResult> UpdatePassword(AuthRequest dataUpdate)
+    {
+        User user = await _unitOfWork.Users.GetByIdString(dataUpdate.Cedula);
+        user.Password = dataUpdate.Password;
+
+        
+
+        int num = await _unitOfWork.SaveAsync();
+
+        if(num != 0) return Ok($"Contraseña actualizada");
+
+        return BadRequest();
+
+    }
+    
 
 }
