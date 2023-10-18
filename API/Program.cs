@@ -22,7 +22,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddDbContext<APIContext>(opt =>
 {
-    string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+    string connectionString = builder.Configuration.GetConnectionString("DefaultConnectionLuis");
     opt.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 });
 builder.Services.AddSwaggerGen();
