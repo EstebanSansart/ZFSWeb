@@ -62,17 +62,22 @@ public class UserController : BaseApiController
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<User>> Post(UserDto userDto){
+    public async Task<ActionResult<User>> Post(UserDto userDto)
+    {
         var user = _mapper.Map<User>(userDto);
-        this._unitOfWork.Users.Add(user);
+        user.Password = await _unitOfWork.Users.GenerarPasswordAleatoria();
+        _unitOfWork.Users.Add(user);
         await _unitOfWork.SaveAsync();
+
         if (user == null)
         {
             return BadRequest();
         }
+
         userDto.UserCc = user.UserCc;
-        return CreatedAtAction(nameof(Post),new {id= userDto.UserCc}, userDto);
+        return CreatedAtAction(nameof(Post), new { id = userDto.UserCc }, userDto);
     }
+
 
     [HttpPost("Login")]
     [ProducesResponseType(StatusCodes.Status201Created)]
