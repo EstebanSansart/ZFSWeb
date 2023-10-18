@@ -31,4 +31,10 @@ public class UserRepository : GenericRepository<User>, IUser
         return await _context.Users
             .FirstOrDefaultAsync(u => u.Name.ToLower() == username.ToLower());
     }
+
+    public async Task<bool> ValidarUsuario(string UserCc, string Password)
+    {
+        return _context.Users.Any(m => m.UserCc == UserCc && m.Password == Password);
+    }
+    
 }
