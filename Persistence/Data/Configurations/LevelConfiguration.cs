@@ -8,22 +8,22 @@ namespace Persistence.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Level> builder)
         {
-            builder.ToTable("Level");
+            builder.ToTable("level");
 
             builder.HasKey(r => r.LevelId);
 
             // Properties
             builder.Property(r => r.LevelId)
             .IsRequired()
-            .HasColumnName("LevelId");
+            .HasColumnName("level_id");
 
             builder.Property(r => r.LevelNumber)
             .IsRequired()
-            .HasColumnName("LevelNumber");
+            .HasColumnName("level_number");
 
             builder.Property(r => r.CurrentPoints)
             .IsRequired()
-            .HasColumnName("LevelCurrentPoints");
+            .HasColumnName("level_current_points");
         }
     }
 }

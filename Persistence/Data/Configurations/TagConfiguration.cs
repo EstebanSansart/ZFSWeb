@@ -8,22 +8,22 @@ namespace Persistence.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Tag> builder)
         {
-            builder.ToTable("Tag");
+            builder.ToTable("tag");
 
             builder.HasKey(r => r.TagId);
 
             // Properties
             builder.Property(r => r.TagId)
             .IsRequired()
-            .HasColumnName("TagId");
+            .HasColumnName("tag_id");
 
             builder.Property(r => r.Name)
             .IsRequired()
-            .HasColumnName("TagName");
+            .HasColumnName("tag_name");
 
             builder.Property(r => r.Description)
             .IsRequired()
-            .HasColumnName("TagDescription");
+            .HasColumnName("tag_description");
 
             // User - Tag
 
@@ -44,7 +44,7 @@ namespace Persistence.Data.Configurations
 
                 j =>
                 {
-                    j.ToTable("UserTag");
+                    j.ToTable("user_tag");
                     j.HasKey(t => new{t.TagId, t.UserCc});
                 }
             );

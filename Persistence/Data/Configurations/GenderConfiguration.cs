@@ -8,18 +8,18 @@ namespace Persistence.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Gender> builder)
         {
-            builder.ToTable("Gender");
+            builder.ToTable("gender");
 
             builder.HasKey(r => r.GenderId);
 
             // Properties
             builder.Property(r => r.GenderId)
             .IsRequired()
-            .HasColumnName("GenderId");
+            .HasColumnName("gender_id");
 
             builder.Property(r => r.GenderType)
             .IsRequired()
-            .HasColumnName("GenderType");
+            .HasColumnName("gender_type");
         }
     }
 }

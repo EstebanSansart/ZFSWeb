@@ -24,21 +24,21 @@ namespace Persistence.Data.Migrations
                     b.Property<int>("CompanyId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("CompanyId");
+                        .HasColumnName("company_id");
 
                     b.Property<string>("Contact")
                         .IsRequired()
                         .HasColumnType("longtext")
-                        .HasColumnName("CompanyContact");
+                        .HasColumnName("company_contact");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext")
-                        .HasColumnName("CompanyName");
+                        .HasColumnName("company_name");
 
                     b.HasKey("CompanyId");
 
-                    b.ToTable("Company", (string)null);
+                    b.ToTable("company", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Event", b =>
@@ -46,40 +46,40 @@ namespace Persistence.Data.Migrations
                     b.Property<int>("EventId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("EventId");
+                        .HasColumnName("event_id");
 
                     b.Property<string>("Capacity")
                         .IsRequired()
                         .HasColumnType("longtext")
-                        .HasColumnName("EventCapacity");
+                        .HasColumnName("event_capacity");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime(6)")
-                        .HasColumnName("EventDate");
+                        .HasColumnName("event_date");
 
                     b.Property<string>("EventPoints")
                         .IsRequired()
                         .HasColumnType("longtext")
-                        .HasColumnName("EventPoints");
+                        .HasColumnName("event_points");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext")
-                        .HasColumnName("EventName");
+                        .HasColumnName("event_name");
 
                     b.Property<string>("Sponsorship")
                         .IsRequired()
                         .HasColumnType("longtext")
-                        .HasColumnName("EventSponsorship");
+                        .HasColumnName("event_sponsorship");
 
                     b.Property<string>("State")
                         .IsRequired()
                         .HasColumnType("longtext")
-                        .HasColumnName("EventState");
+                        .HasColumnName("event_state");
 
                     b.HasKey("EventId");
 
-                    b.ToTable("Event", (string)null);
+                    b.ToTable("event", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.EventAttendance", b =>
@@ -87,14 +87,14 @@ namespace Persistence.Data.Migrations
                     b.Property<int>("EventId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserCc")
-                        .HasColumnType("int");
+                    b.Property<string>("UserCc")
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("EventId", "UserCc");
 
                     b.HasIndex("UserCc");
 
-                    b.ToTable("EventAttendance", (string)null);
+                    b.ToTable("event_attendance", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Gender", b =>
@@ -102,16 +102,33 @@ namespace Persistence.Data.Migrations
                     b.Property<int>("GenderId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("GenderId");
+                        .HasColumnName("gender_id");
 
                     b.Property<string>("GenderType")
                         .IsRequired()
                         .HasColumnType("longtext")
-                        .HasColumnName("GenderType");
+                        .HasColumnName("gender_type");
 
                     b.HasKey("GenderId");
 
-                    b.ToTable("Gender", (string)null);
+                    b.ToTable("gender", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.Image", b =>
+                {
+                    b.Property<int>("ImageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("image_id");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("longtext")
+                        .HasColumnName("image_url");
+
+                    b.HasKey("ImageId");
+
+                    b.ToTable("image", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Level", b =>
@@ -119,21 +136,20 @@ namespace Persistence.Data.Migrations
                     b.Property<int>("LevelId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("LevelId");
+                        .HasColumnName("level_id");
 
                     b.Property<string>("CurrentPoints")
                         .IsRequired()
                         .HasColumnType("longtext")
-                        .HasColumnName("LevelCurrentPoints");
+                        .HasColumnName("level_current_points");
 
-                    b.Property<string>("LevelNumber")
-                        .IsRequired()
-                        .HasColumnType("longtext")
-                        .HasColumnName("LevelNumber");
+                    b.Property<int>("LevelNumber")
+                        .HasColumnType("int")
+                        .HasColumnName("level_number");
 
                     b.HasKey("LevelId");
 
-                    b.ToTable("Level", (string)null);
+                    b.ToTable("level", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Reaction", b =>
@@ -141,16 +157,16 @@ namespace Persistence.Data.Migrations
                     b.Property<int>("ReactionId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("ReactionId");
+                        .HasColumnName("reaction_id");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext")
-                        .HasColumnName("ReactionName");
+                        .HasColumnName("reaction_name");
 
                     b.HasKey("ReactionId");
 
-                    b.ToTable("Reaction", (string)null);
+                    b.ToTable("reaction", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.Tag", b =>
@@ -158,34 +174,33 @@ namespace Persistence.Data.Migrations
                     b.Property<int>("TagId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("TagId");
+                        .HasColumnName("tag_id");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("longtext")
-                        .HasColumnName("TagDescription");
+                        .HasColumnName("tag_description");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext")
-                        .HasColumnName("TagName");
+                        .HasColumnName("tag_name");
 
                     b.HasKey("TagId");
 
-                    b.ToTable("Tag", (string)null);
+                    b.ToTable("tag", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.User", b =>
                 {
-                    b.Property<int>("UserCc")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("UserCc");
+                    b.Property<string>("UserCc")
+                        .HasColumnType("varchar(255)")
+                        .HasColumnName("user_cc");
 
                     b.Property<string>("Age")
                         .IsRequired()
                         .HasColumnType("longtext")
-                        .HasColumnName("UserAge");
+                        .HasColumnName("user_age");
 
                     b.Property<int>("CompanyId")
                         .HasColumnType("int");
@@ -193,7 +208,7 @@ namespace Persistence.Data.Migrations
                     b.Property<string>("Contact")
                         .IsRequired()
                         .HasColumnType("longtext")
-                        .HasColumnName("UserContact");
+                        .HasColumnName("user_contact");
 
                     b.Property<int>("GenderId")
                         .HasColumnType("int");
@@ -204,7 +219,7 @@ namespace Persistence.Data.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext")
-                        .HasColumnName("UserName");
+                        .HasColumnName("user_name");
 
                     b.HasKey("UserCc");
 
@@ -214,7 +229,7 @@ namespace Persistence.Data.Migrations
 
                     b.HasIndex("LevelId");
 
-                    b.ToTable("User", (string)null);
+                    b.ToTable("user", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.UserReaction", b =>
@@ -222,14 +237,14 @@ namespace Persistence.Data.Migrations
                     b.Property<int>("ReactionId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserCc")
-                        .HasColumnType("int");
+                    b.Property<string>("UserCc")
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("ReactionId", "UserCc");
 
                     b.HasIndex("UserCc");
 
-                    b.ToTable("UserReaction", (string)null);
+                    b.ToTable("user_reaction", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.UserTag", b =>
@@ -237,14 +252,14 @@ namespace Persistence.Data.Migrations
                     b.Property<int>("TagId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserCc")
-                        .HasColumnType("int");
+                    b.Property<string>("UserCc")
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("TagId", "UserCc");
 
                     b.HasIndex("UserCc");
 
-                    b.ToTable("UserTag", (string)null);
+                    b.ToTable("user_tag", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.EventAttendance", b =>

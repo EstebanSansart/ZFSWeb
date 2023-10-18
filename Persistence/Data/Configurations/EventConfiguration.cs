@@ -8,38 +8,38 @@ namespace Persistence.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Event> builder)
         {
-            builder.ToTable("Event");
+            builder.ToTable("event");
 
             builder.HasKey(r => r.EventId);
 
             // Properties
             builder.Property(r => r.EventId)
             .IsRequired()
-            .HasColumnName("EventId");
+            .HasColumnName("event_id");
 
             builder.Property(r => r.Name)
             .IsRequired()
-            .HasColumnName("EventName");
+            .HasColumnName("event_name");
 
             builder.Property(r => r.Capacity)
             .IsRequired()
-            .HasColumnName("EventCapacity");
+            .HasColumnName("event_capacity");
 
             builder.Property(r => r.State)
             .IsRequired()
-            .HasColumnName("EventState");
+            .HasColumnName("event_state");
 
             builder.Property(r => r.EventPoints)
             .IsRequired()
-            .HasColumnName("EventPoints");
+            .HasColumnName("event_points");
 
             builder.Property(r => r.Date)
             .IsRequired()
-            .HasColumnName("EventDate");
+            .HasColumnName("event_date");
 
             builder.Property(r => r.Sponsorship)
             .IsRequired()
-            .HasColumnName("EventSponsorship");
+            .HasColumnName("event_sponsorship");
 
             // User - Event
             builder
@@ -59,7 +59,7 @@ namespace Persistence.Data.Configurations
 
                 j =>
                 {
-                    j.ToTable("EventAttendance");
+                    j.ToTable("event_attendance");
                     j.HasKey(t => new{t.EventId, t.UserCc});
                 }
             );

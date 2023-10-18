@@ -19,6 +19,7 @@ public class UnitOfWork : IUnitOfWork, IDisposable
     UserReactionRepository _userReaction;
     UserRepository _user;
     UserTagRepository _userTag;
+    ImageRepository _image;
 
     private readonly APIContext _context;
     public UnitOfWork(APIContext context)
@@ -79,6 +80,14 @@ public class UnitOfWork : IUnitOfWork, IDisposable
         {
             _tag ??= new TagRepository(_context);
             return _tag;
+        }
+    }
+    public IImage Images
+    {
+        get
+        {
+            _image ??= new ImageRepository(_context);
+            return _image;
         }
     }
     public IUserReaction UserReactions

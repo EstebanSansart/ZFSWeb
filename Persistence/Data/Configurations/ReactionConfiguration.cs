@@ -8,18 +8,18 @@ namespace Persistence.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Reaction> builder)
         {
-            builder.ToTable("Reaction");
+            builder.ToTable("reaction");
 
             builder.HasKey(r => r.ReactionId);
 
             // Properties
             builder.Property(r => r.ReactionId)
             .IsRequired()
-            .HasColumnName("ReactionId");
+            .HasColumnName("reaction_id");
 
             builder.Property(r => r.Name)
             .IsRequired()
-            .HasColumnName("ReactionName");
+            .HasColumnName("reaction_name");
 
             // User - Reaction
             builder
@@ -39,7 +39,7 @@ namespace Persistence.Data.Configurations
 
                 j =>
                 {
-                    j.ToTable("UserReaction");
+                    j.ToTable("user_reaction");
                     j.HasKey(t => new{t.ReactionId, t.UserCc});
                 }
             );

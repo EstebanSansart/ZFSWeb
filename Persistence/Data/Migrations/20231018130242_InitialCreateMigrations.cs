@@ -16,121 +16,135 @@ namespace Persistence.Data.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Company",
+                name: "company",
                 columns: table => new
                 {
-                    CompanyId = table.Column<int>(type: "int", nullable: false)
+                    company_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    CompanyName = table.Column<string>(type: "longtext", nullable: false)
+                    company_name = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    CompanyContact = table.Column<string>(type: "longtext", nullable: false)
+                    company_contact = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Company", x => x.CompanyId);
+                    table.PrimaryKey("PK_company", x => x.company_id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Event",
+                name: "event",
                 columns: table => new
                 {
-                    EventId = table.Column<int>(type: "int", nullable: false)
+                    event_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    EventName = table.Column<string>(type: "longtext", nullable: false)
+                    event_name = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    EventCapacity = table.Column<string>(type: "longtext", nullable: false)
+                    event_capacity = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    EventState = table.Column<string>(type: "longtext", nullable: false)
+                    event_state = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    EventPoints = table.Column<string>(type: "longtext", nullable: false)
+                    event_points = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    EventDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    EventSponsorship = table.Column<string>(type: "longtext", nullable: false)
+                    event_date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    event_sponsorship = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Event", x => x.EventId);
+                    table.PrimaryKey("PK_event", x => x.event_id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Gender",
+                name: "gender",
                 columns: table => new
                 {
-                    GenderId = table.Column<int>(type: "int", nullable: false)
+                    gender_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    GenderType = table.Column<string>(type: "longtext", nullable: false)
+                    gender_type = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Gender", x => x.GenderId);
+                    table.PrimaryKey("PK_gender", x => x.gender_id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Level",
+                name: "image",
                 columns: table => new
                 {
-                    LevelId = table.Column<int>(type: "int", nullable: false)
+                    image_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    LevelNumber = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    LevelCurrentPoints = table.Column<string>(type: "longtext", nullable: false)
+                    image_url = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Level", x => x.LevelId);
+                    table.PrimaryKey("PK_image", x => x.image_id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Reaction",
+                name: "level",
                 columns: table => new
                 {
-                    ReactionId = table.Column<int>(type: "int", nullable: false)
+                    level_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ReactionName = table.Column<string>(type: "longtext", nullable: false)
+                    level_number = table.Column<int>(type: "int", nullable: false),
+                    level_current_points = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Reaction", x => x.ReactionId);
+                    table.PrimaryKey("PK_level", x => x.level_id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Tag",
+                name: "reaction",
                 columns: table => new
                 {
-                    TagId = table.Column<int>(type: "int", nullable: false)
+                    reaction_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    TagName = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    TagDescription = table.Column<string>(type: "longtext", nullable: false)
+                    reaction_name = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Tag", x => x.TagId);
+                    table.PrimaryKey("PK_reaction", x => x.reaction_id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "User",
+                name: "tag",
                 columns: table => new
                 {
-                    UserCc = table.Column<int>(type: "int", nullable: false)
+                    tag_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    UserName = table.Column<string>(type: "longtext", nullable: false)
+                    tag_name = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    UserAge = table.Column<string>(type: "longtext", nullable: false)
+                    tag_description = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_tag", x => x.tag_id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "user",
+                columns: table => new
+                {
+                    user_cc = table.Column<string>(type: "varchar(255)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    UserContact = table.Column<string>(type: "longtext", nullable: false)
+                    user_name = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    user_age = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    user_contact = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CompanyId = table.Column<int>(type: "int", nullable: false),
                     GenderId = table.Column<int>(type: "int", nullable: false),
@@ -138,131 +152,134 @@ namespace Persistence.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_User", x => x.UserCc);
+                    table.PrimaryKey("PK_user", x => x.user_cc);
                     table.ForeignKey(
-                        name: "FK_User_Company_CompanyId",
+                        name: "FK_user_company_CompanyId",
                         column: x => x.CompanyId,
-                        principalTable: "Company",
-                        principalColumn: "CompanyId",
+                        principalTable: "company",
+                        principalColumn: "company_id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_User_Gender_GenderId",
+                        name: "FK_user_gender_GenderId",
                         column: x => x.GenderId,
-                        principalTable: "Gender",
-                        principalColumn: "GenderId",
+                        principalTable: "gender",
+                        principalColumn: "gender_id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_User_Level_LevelId",
+                        name: "FK_user_level_LevelId",
                         column: x => x.LevelId,
-                        principalTable: "Level",
-                        principalColumn: "LevelId",
+                        principalTable: "level",
+                        principalColumn: "level_id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "EventAttendance",
+                name: "event_attendance",
                 columns: table => new
                 {
-                    UserCc = table.Column<int>(type: "int", nullable: false),
+                    UserCc = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     EventId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_EventAttendance", x => new { x.EventId, x.UserCc });
+                    table.PrimaryKey("PK_event_attendance", x => new { x.EventId, x.UserCc });
                     table.ForeignKey(
-                        name: "FK_EventAttendance_Event_EventId",
+                        name: "FK_event_attendance_event_EventId",
                         column: x => x.EventId,
-                        principalTable: "Event",
-                        principalColumn: "EventId",
+                        principalTable: "event",
+                        principalColumn: "event_id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EventAttendance_User_UserCc",
+                        name: "FK_event_attendance_user_UserCc",
                         column: x => x.UserCc,
-                        principalTable: "User",
-                        principalColumn: "UserCc",
+                        principalTable: "user",
+                        principalColumn: "user_cc",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "UserReaction",
+                name: "user_reaction",
                 columns: table => new
                 {
-                    UserCc = table.Column<int>(type: "int", nullable: false),
+                    UserCc = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     ReactionId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserReaction", x => new { x.ReactionId, x.UserCc });
+                    table.PrimaryKey("PK_user_reaction", x => new { x.ReactionId, x.UserCc });
                     table.ForeignKey(
-                        name: "FK_UserReaction_Reaction_ReactionId",
+                        name: "FK_user_reaction_reaction_ReactionId",
                         column: x => x.ReactionId,
-                        principalTable: "Reaction",
-                        principalColumn: "ReactionId",
+                        principalTable: "reaction",
+                        principalColumn: "reaction_id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserReaction_User_UserCc",
+                        name: "FK_user_reaction_user_UserCc",
                         column: x => x.UserCc,
-                        principalTable: "User",
-                        principalColumn: "UserCc",
+                        principalTable: "user",
+                        principalColumn: "user_cc",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "UserTag",
+                name: "user_tag",
                 columns: table => new
                 {
-                    UserCc = table.Column<int>(type: "int", nullable: false),
+                    UserCc = table.Column<string>(type: "varchar(255)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     TagId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserTag", x => new { x.TagId, x.UserCc });
+                    table.PrimaryKey("PK_user_tag", x => new { x.TagId, x.UserCc });
                     table.ForeignKey(
-                        name: "FK_UserTag_Tag_TagId",
+                        name: "FK_user_tag_tag_TagId",
                         column: x => x.TagId,
-                        principalTable: "Tag",
-                        principalColumn: "TagId",
+                        principalTable: "tag",
+                        principalColumn: "tag_id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserTag_User_UserCc",
+                        name: "FK_user_tag_user_UserCc",
                         column: x => x.UserCc,
-                        principalTable: "User",
-                        principalColumn: "UserCc",
+                        principalTable: "user",
+                        principalColumn: "user_cc",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EventAttendance_UserCc",
-                table: "EventAttendance",
+                name: "IX_event_attendance_UserCc",
+                table: "event_attendance",
                 column: "UserCc");
 
             migrationBuilder.CreateIndex(
-                name: "IX_User_CompanyId",
-                table: "User",
+                name: "IX_user_CompanyId",
+                table: "user",
                 column: "CompanyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_User_GenderId",
-                table: "User",
+                name: "IX_user_GenderId",
+                table: "user",
                 column: "GenderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_User_LevelId",
-                table: "User",
+                name: "IX_user_LevelId",
+                table: "user",
                 column: "LevelId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserReaction_UserCc",
-                table: "UserReaction",
+                name: "IX_user_reaction_UserCc",
+                table: "user_reaction",
                 column: "UserCc");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserTag_UserCc",
-                table: "UserTag",
+                name: "IX_user_tag_UserCc",
+                table: "user_tag",
                 column: "UserCc");
         }
 
@@ -270,34 +287,37 @@ namespace Persistence.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "EventAttendance");
+                name: "event_attendance");
 
             migrationBuilder.DropTable(
-                name: "UserReaction");
+                name: "image");
 
             migrationBuilder.DropTable(
-                name: "UserTag");
+                name: "user_reaction");
 
             migrationBuilder.DropTable(
-                name: "Event");
+                name: "user_tag");
 
             migrationBuilder.DropTable(
-                name: "Reaction");
+                name: "event");
 
             migrationBuilder.DropTable(
-                name: "Tag");
+                name: "reaction");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "tag");
 
             migrationBuilder.DropTable(
-                name: "Company");
+                name: "user");
 
             migrationBuilder.DropTable(
-                name: "Gender");
+                name: "company");
 
             migrationBuilder.DropTable(
-                name: "Level");
+                name: "gender");
+
+            migrationBuilder.DropTable(
+                name: "level");
         }
     }
 }

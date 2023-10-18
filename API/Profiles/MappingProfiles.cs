@@ -15,5 +15,6 @@ public class MappingProfiles : Profile
         CreateMap<Reaction,ReactionDto>().ReverseMap();
         CreateMap<Tag,TagDto>().ReverseMap();
         CreateMap<User,UserDto>().ReverseMap();
+        CreateMap<Image,ImageDto>().ReverseMap();
     }
 }

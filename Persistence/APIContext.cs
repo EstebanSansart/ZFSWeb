@@ -18,10 +18,12 @@ namespace Persistence{
         public DbSet<Gender> Genders { get; set; }
         public DbSet<Level> Levels { get; set; }
         public DbSet<Reaction> Reactions { get; set; }
+        public DbSet<RefreshTokenRecord> RefreshTokenRecords { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserReaction> UserReactions { get; set; }
         public DbSet<UserTag> UserTags { get; set; }
+        public DbSet<Image> Images { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

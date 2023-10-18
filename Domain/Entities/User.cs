@@ -1,7 +1,7 @@
 namespace Domain.Entities;
 public class User{
     // Properties
-    public int UserCc { get; set; }
+    public string UserCc { get; set; }
     public string Name { get; set; }
     public string Age { get; set; }
     public string Contact { get; set; }
@@ -13,6 +13,7 @@ public class User{
     public ICollection<EventAttendance> EventAttendances { get; set; }
     public ICollection<Tag> Tags { get; set; } = new HashSet<Tag>();
     public ICollection<UserTag> UserTags { get; set; }
+    public virtual ICollection<RefreshTokenRecord> RefreshTokenRecords { get; } = new List<RefreshTokenRecord>();
 
     // Foreign Keys
     public int CompanyId { get; set; }

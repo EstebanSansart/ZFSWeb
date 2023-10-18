@@ -13,5 +13,6 @@ public interface IUnitOfWork
     public IUserReaction UserReactions {get;}
     public IUserTag UserTags {get;}
     public IUser Users {get;}
+    public IImage Images {get;}
     Task<int> SaveAsync();
 }

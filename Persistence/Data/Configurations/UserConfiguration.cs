@@ -8,27 +8,26 @@ namespace Persistence.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.ToTable("User");
+            builder.ToTable("user");
 
             builder.HasKey(r => r.UserCc);
 
             // Properties
             builder.Property(r => r.UserCc)
             .IsRequired()
-            .HasColumnType("int")
-            .HasColumnName("UserCc");
+            .HasColumnName("user_cc");
 
             builder.Property(r => r.Name)
             .IsRequired()
-            .HasColumnName("UserName");
+            .HasColumnName("user_name");
 
             builder.Property(r => r.Age)
             .IsRequired()
-            .HasColumnName("UserAge");
+            .HasColumnName("user_age");
 
             builder.Property(r => r.Contact)
             .IsRequired()
-            .HasColumnName("UserContact");
+            .HasColumnName("user_contact");
 
             // Relationships
             builder.HasOne(x => x.Company)

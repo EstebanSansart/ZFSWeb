@@ -7,7 +7,7 @@ namespace Application.Repository;
 
 public class GenericRepository<T> : IGenericRepository<T> where T : class
 {
-    protected  readonly APIContext _context;
+    protected readonly APIContext _context;
     public GenericRepository(APIContext context)
     {
         _context = context;

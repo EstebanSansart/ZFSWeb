@@ -8,22 +8,22 @@ namespace Persistence.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Company> builder)
         {
-            builder.ToTable("Company");
+            builder.ToTable("company");
 
             builder.HasKey(r => r.CompanyId);
 
             // Properties
             builder.Property(r => r.CompanyId)
             .IsRequired()
-            .HasColumnName("CompanyId");
+            .HasColumnName("company_id");
 
             builder.Property(r => r.Name)
             .IsRequired()
-            .HasColumnName("CompanyName");
+            .HasColumnName("company_name");
 
             builder.Property(r => r.Contact)
             .IsRequired()
-            .HasColumnName("CompanyContact");
+            .HasColumnName("company_contact");
         }
     }
 }
