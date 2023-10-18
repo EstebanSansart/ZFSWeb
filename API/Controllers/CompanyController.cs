@@ -33,7 +33,7 @@ public class CompanyController : BaseApiController
         return _mapper.Map<List<CompanyDto>>(companies);
     }
     [HttpGet("Pager")]
-    [Authorize]
+    //[Authorize]
     [MapToApiVersion("1.1")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

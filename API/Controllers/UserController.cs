@@ -23,7 +23,7 @@ public class UserController : BaseApiController
         _mapper = mapper;
     }
     [HttpGet]
-    [Authorize(Roles = "Administrador")]
+    //[Authorize(Roles = "Administrador")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -33,7 +33,7 @@ public class UserController : BaseApiController
         return _mapper.Map<List<UserDto>>(users);
     }
     [HttpGet("Pager")]
-    [Authorize]
+    //[Authorize]
     [MapToApiVersion("1.1")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

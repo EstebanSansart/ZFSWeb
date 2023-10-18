@@ -9,7 +9,4 @@ public class EventDto
     public string EventPoints { get; set; }
     public DateTime Date { get; set; }
     public string Sponsorship { get; set; }
-
-    // Collections
-    public ICollection<UserDto> Users { get; set; } = new HashSet<UserDto>();
 }
