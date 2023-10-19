@@ -26,4 +26,8 @@ public class UserReactionRepository : GenericRepository<UserReaction>, IUserReac
                                 .ToListAsync();
         return ( totalRegistros, registros);
     }
+    public virtual async Task<UserReaction> GetByIdAsync(string UserCc, int ReactionId)
+    {
+        return await _context.Set<UserReaction>().Where(x => x.ReactionId == ReactionId && x.UserCc == UserCc).FirstOrDefaultAsync();
+    }
 }

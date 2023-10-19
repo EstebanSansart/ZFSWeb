@@ -26,4 +26,8 @@ public class UserTagRepository : GenericRepository<UserTag>, IUserTag
                                 .ToListAsync();
         return ( totalRegistros, registros);
     }
+    public virtual async Task<UserTag> GetByIdAsync(string UserCc, int TagId)
+    {
+        return await _context.Set<UserTag>().Where(x => x.TagId == TagId && x.UserCc == UserCc).FirstOrDefaultAsync();
+    }
 }

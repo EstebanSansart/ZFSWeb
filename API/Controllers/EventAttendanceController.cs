@@ -24,7 +24,7 @@ namespace API.Controllers;
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-           public async Task<ActionResult> Add(EventoAttendaceDto EventeAttendanceDto)
+           public async Task<ActionResult> Add(EventAttendanceDto EventeAttendanceDto)
         {
             if(EventeAttendanceDto == null)
                     return BadRequest();
@@ -45,16 +45,14 @@ namespace API.Controllers;
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-        public async Task<ActionResult<EventoAttendaceDto>> GetById(string cedula,int EventoId)
+        public async Task<ActionResult<EventAttendanceDto>> GetById(string cedula,int EventoId)
         {
             EventAttendance eventAttendance =await  _unitOfWork.EventAttendances.GetByIdAttendance(cedula,EventoId);
 
                 if(eventAttendance == null)
                     return BadRequest();
 
-            return _mapper.Map<EventoAttendaceDto>(eventAttendance);
+            return _mapper.Map<EventAttendanceDto>(eventAttendance);
 
         }
-
-        
     }

@@ -10,6 +10,8 @@ public class MappingProfiles : Profile
     public MappingProfiles()
     {
         CreateMap<User,LoginDto>().ReverseMap();
+        CreateMap<UserReaction,UserReactionDto>().ReverseMap();
+        CreateMap<UserTag,UserTagDto>().ReverseMap();
         CreateMap<Company,CompanyDto>().ReverseMap();
         CreateMap<Event,EventDto>().ReverseMap();
         CreateMap<Event,EventoImageDto>().ReverseMap();
@@ -20,7 +22,7 @@ public class MappingProfiles : Profile
         CreateMap<User,UserDto>().ReverseMap();
         CreateMap<User,UserNoLevelDto>().ReverseMap();
         CreateMap<Image,ImageDto>().ReverseMap();
-        CreateMap<EventAttendance,EventoAttendaceDto>().ForMember(dest => dest.Cedula, opt => opt.MapFrom(src => src.UserCc)).ReverseMap();
+        CreateMap<EventAttendance,EventAttendanceDto>().ForMember(dest => dest.Cedula, opt => opt.MapFrom(src => src.UserCc)).ReverseMap();
 
     }
 }
