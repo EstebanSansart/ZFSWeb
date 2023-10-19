@@ -29,7 +29,7 @@ namespace Persistence.Data.Configurations
                 new{
                     LevelId = 1,
                     LevelNumber = 1,
-                    CurrentPoints = "0"
+                    CurrentPoints = 0
                 }
             );
         }

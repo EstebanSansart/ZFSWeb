@@ -23,6 +23,6 @@ public class User{
     public Company Company { get; set; }
     public int GenderId { get; set; }
     public Gender Gender { get; set; }
-    public int LevelId { get; set; }
+    public int ? LevelId { get; set; }
     public Level Level { get; set; }
 }

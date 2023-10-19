@@ -52,7 +52,8 @@ namespace Persistence.Data.Configurations
 
             // Default Data
             builder.HasData(
-            new{
+            new[]{
+                new{
                 UserCc = "1065853628",
                 Name = "Rolando",
                 Age = "10",
@@ -64,6 +65,22 @@ namespace Persistence.Data.Configurations
                 CompanyId = 1,
                 GenderId = 1,
                 LevelId = 1
+            },
+            new
+            {
+                UserCc = "123",
+                Name = "Brayan",
+                Age = "19",
+                
+                Contact = "Brayan@gmail.com",
+                Points = 0,
+                IsNew = true,
+                Password = "123",
+                CompanyId = 1,
+                GenderId = 1,
+                LevelId = 1
+
+            }
             }
         );
         }

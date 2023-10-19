@@ -1,3 +1,4 @@
+using Api.Dtos;
 using API.Dtos;
 using API.Dtos.Custom;
 using API.Helpers;
@@ -31,10 +32,10 @@ public class UserController : BaseApiController
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async  Task<ActionResult<IEnumerable<UserDto>>> Get()
+    public async  Task<ActionResult<IEnumerable<UserNoLevelDto>>> Get()
     {
         var users = await _unitOfWork.Users.GetAll();
-        return _mapper.Map<List<UserDto>>(users);
+        return _mapper.Map<List<UserNoLevelDto>>(users);
     }
     [HttpGet("Pager")]
     //[Authorize]
@@ -66,6 +67,7 @@ public class UserController : BaseApiController
     {
         var user = _mapper.Map<User>(userDto);
         user.Password = await _unitOfWork.Users.GenerarPasswordAleatoria();
+        user.LevelId = 1;
         _unitOfWork.Users.Add(user);
         await _unitOfWork.SaveAsync();
 
@@ -77,6 +79,19 @@ public class UserController : BaseApiController
         userDto.UserCc = user.UserCc;
         return CreatedAtAction(nameof(Post), new { id = userDto.UserCc }, userDto);
     }
+
+
+    [HttpPost("ActualizarPuntos")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
+    public async Task<UserDto> ActualizarPuntos(string Cedula)
+    {
+        var Usuario = await _unitOfWork.Users.ActualizarNivelSegunPuntosAsistencia(Cedula);
+
+        return _mapper.Map<UserDto>(Usuario);
+    }
+    
 
 
     [HttpPost("Login")]
@@ -150,8 +165,7 @@ public class UserController : BaseApiController
     }
 
 
-    [HttpPut("UpdatePassword")]
-    [Authorize(Roles="")]
+    [HttpPut("UpdatePassword")] 
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
 

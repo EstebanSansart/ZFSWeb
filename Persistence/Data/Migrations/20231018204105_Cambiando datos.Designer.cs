@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
@@ -11,9 +12,11 @@ using Persistence;
 namespace Persistence.Data.Migrations
 {
     [DbContext(typeof(APIContext))]
-    partial class APIContextModelSnapshot : ModelSnapshot
+    [Migration("20231018204105_Cambiando datos")]
+    partial class Cambiandodatos
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,25 +82,14 @@ namespace Persistence.Data.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("event_sponsorship");
 
-                    b.Property<bool>("State")
-                        .HasColumnType("tinyint(1)")
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("longtext")
                         .HasColumnName("event_state");
 
                     b.HasKey("EventId");
 
                     b.ToTable("event", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            EventId = 1,
-                            Capacity = 200,
-                            Date = new DateTime(2023, 4, 4, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EventPoints = 50,
-                            Name = "Hallowen",
-                            Sponsorship = "Frysby",
-                            State = true
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.EventAttendance", b =>
@@ -146,9 +138,6 @@ namespace Persistence.Data.Migrations
                         .HasColumnType("int")
                         .HasColumnName("image_id");
 
-                    b.Property<int>("EventoId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Url")
                         .IsRequired()
                         .HasColumnType("longtext")
@@ -156,22 +145,13 @@ namespace Persistence.Data.Migrations
 
                     b.HasKey("ImageId");
 
-                    b.HasIndex("EventoId");
-
                     b.ToTable("image", (string)null);
 
                     b.HasData(
                         new
                         {
                             ImageId = 1,
-                            EventoId = 1,
-                            Url = "https://www.tooltyp.com/wp-content/uploads/2014/10/1900x920-8-beneficios-de-usar-imagenes-en-nuestros-sitios-web.jpg"
-                        },
-                        new
-                        {
-                            ImageId = 2,
-                            EventoId = 1,
-                            Url = "https://images.ctfassets.net/hrltx12pl8hq/5KiKmVEsCQPMNrbOE6w0Ot/341c573752bf35cb969e21fcd279d3f9/hero-img_copy.jpg?fit=fill&w=600&h=400"
+                            Url = "https://www.tooltyp.com/wp-content/uploads/2014/10/1900x920-8-beneficios-de-usar-imagenes-en-nuestros-sitios-web.jpg "
                         });
                 });
 
@@ -312,7 +292,7 @@ namespace Persistence.Data.Migrations
                         .HasDefaultValue(true)
                         .HasColumnName("is_new");
 
-                    b.Property<int?>("LevelId")
+                    b.Property<int>("LevelId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -350,19 +330,6 @@ namespace Persistence.Data.Migrations
                             Name = "Rolando",
                             Password = "123456",
                             Points = 50
-                        },
-                        new
-                        {
-                            UserCc = "123",
-                            Age = "19",
-                            CompanyId = 1,
-                            Contact = "Brayan@gmail.com",
-                            GenderId = 1,
-                            IsNew = true,
-                            LevelId = 1,
-                            Name = "Brayan",
-                            Password = "123",
-                            Points = 0
                         });
                 });
 
@@ -415,17 +382,6 @@ namespace Persistence.Data.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Image", b =>
-                {
-                    b.HasOne("Domain.Entities.Event", "Event")
-                        .WithMany("Images")
-                        .HasForeignKey("EventoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Event");
-                });
-
             modelBuilder.Entity("Domain.Entities.RefreshTokenRecord", b =>
                 {
                     b.HasOne("Domain.Entities.User", "User")
@@ -452,7 +408,9 @@ namespace Persistence.Data.Migrations
 
                     b.HasOne("Domain.Entities.Level", "Level")
                         .WithMany("Users")
-                        .HasForeignKey("LevelId");
+                        .HasForeignKey("LevelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Company");
 
@@ -507,8 +465,6 @@ namespace Persistence.Data.Migrations
             modelBuilder.Entity("Domain.Entities.Event", b =>
                 {
                     b.Navigation("EventAttendances");
-
-                    b.Navigation("Images");
                 });
 
             modelBuilder.Entity("Domain.Entities.Gender", b =>

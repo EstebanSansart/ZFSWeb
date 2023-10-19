@@ -26,4 +26,22 @@ public class EventAttendanceRepository : GenericRepository<EventAttendance>, IEv
                                 .ToListAsync();
         return ( totalRegistros, registros);
     }
+
+    public  async Task<EventAttendance> GetByIdAttendance(string UserId, int EventoId)
+    {
+        return await _context.EventAttendances.FirstOrDefaultAsync(x => x.UserCc == UserId && x.EventId == EventoId);
+    }
+
+    public void AddEventoAsistencia(EventAttendance entity)
+    {
+        _context.Set<EventAttendance>().Add(entity);
+    }
+
+    public void AddRangeEventoAsistencia(IEnumerable<EventAttendance> entity)
+    {
+        _context.Set<EventAttendance>().AddRange(entity);
+    }
+
+
+
 }

@@ -26,4 +26,9 @@ public class EventRepository : GenericRepository<Event>, IEvent
                                 .ToListAsync();
         return ( totalRegistros, registros);
     }
+
+    public async Task<IEnumerable<Event>> GetEventImages()
+    {
+        return   await _context.Events.Include(x => x.Images).ToListAsync();
+    }
 }

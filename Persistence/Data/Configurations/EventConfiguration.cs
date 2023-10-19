@@ -41,6 +41,7 @@ namespace Persistence.Data.Configurations
             .IsRequired()
             .HasColumnName("event_sponsorship");
 
+     
             // User - Event
             builder
             .HasMany(r => r.Users)
@@ -61,6 +62,20 @@ namespace Persistence.Data.Configurations
                 {
                     j.ToTable("event_attendance");
                     j.HasKey(t => new{t.EventId, t.UserCc});
+                }
+                
+            );
+
+            builder.HasData(
+                new 
+                {
+                    EventId =1,
+                    Name ="Hallowen",
+                    Capacity = 200,
+                    State = true,
+                    EventPoints =50,
+                    Date = new DateTime(2023,04,04),
+                    Sponsorship ="Frysby"
                 }
             );
         }

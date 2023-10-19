@@ -1,3 +1,4 @@
+using System.Diagnostics.Eventing.Reader;
 using Domain.Entities;
 using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -55,5 +56,34 @@ public class UserRepository : GenericRepository<User>, IUser
         // Devolver la contraseña generada
         return new string(chars);
     }
-    
+
+    public async Task<dynamic> ActualizarNivelSegunPuntosAsistencia(string Cedula)
+    {
+        var  Eventos = await  _context.Events.Where(x=> x.EventAttendances.Any(u => u.UserCc == Cedula)).ToListAsync();
+
+        if(Eventos != null)
+        {
+
+            var PuntosUsuario = Eventos.Sum(x => x.EventPoints);
+
+            var IdNivel = await _context.Levels.Where(x => x.CurrentPoints <= PuntosUsuario)
+                            .OrderByDescending(x => x.CurrentPoints)
+                            .Select(x => x.LevelId)
+                            .FirstOrDefaultAsync();
+
+
+            User usuario = await _context.Users.FirstOrDefaultAsync(x => x.UserCc == Cedula);
+
+            usuario.Points= PuntosUsuario;
+            usuario.LevelId = IdNivel;
+
+            await  _context.SaveChangesAsync();
+            return usuario;
+        }
+
+        return Eventos;
+
+
+                                    
+    }
 }

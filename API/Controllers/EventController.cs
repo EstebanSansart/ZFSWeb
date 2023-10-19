@@ -1,3 +1,4 @@
+using Api.Dtos;
 using API.Dtos;
 using API.Helpers;
 using AutoMapper;
@@ -22,15 +23,17 @@ public class EventController : BaseApiController
         this._unitOfWork = unitOfWork;
         _mapper = mapper;
     }
-    [HttpGet]
+  
+
+    [HttpGet("EventoImages")]
     //[Authorize(Roles = "Administrador")]
     [MapToApiVersion("1.0")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async  Task<ActionResult<IEnumerable<EventDto>>> Get()
+    public async  Task<ActionResult<IEnumerable<EventoImageDto>>> GetAllEventoImages()
     {
-        var events = await _unitOfWork.Events.GetAll();
-        return _mapper.Map<List<EventDto>>(events);
+        var events = await _unitOfWork.Events.GetEventImages();
+        return _mapper.Map<List<EventoImageDto>>(events);
     }
     [HttpGet("Pager")]
     //[Authorize]
