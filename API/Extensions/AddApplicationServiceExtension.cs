@@ -51,7 +51,7 @@ using Domain.Interfaces;
                     new() {
                         Endpoint = "*",
                         Period = "1s",
-                        Limit = 100
+                        Limit = 150
                     }
                 };
             });
